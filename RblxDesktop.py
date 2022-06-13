@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request
 import PIL
-import os
 import pyautogui
 import time
 
@@ -20,11 +19,8 @@ def test():
 def GetPixelColors():
     colors = []
     screenshot = pyautogui.screenshot()
-    screenshot.save("ss.png")
-    time.sleep(0.1)
-    img = PIL.Image.open("ss.png")
-    img = img.resize((96, 54))
-    img.show
+    
+    img = screenshot.resize((96, 54))
     pixels = img.load()
     
     for y in range(54):
@@ -34,7 +30,7 @@ def GetPixelColors():
             color.insert(1, pixels[x, y][1])
             color.insert(2, pixels[x, y][2])
             colors.insert(len(colors)-1, color)
-    os.remove("ss.png")
+
     return colors
 
 #print(GetPixelColors())
